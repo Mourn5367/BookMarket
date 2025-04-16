@@ -6,9 +6,7 @@ import kr.ac.kopo.su.bookmarket.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -39,6 +37,24 @@ public class BookController
         model.addAttribute("bookList", bookList);
         return "books";
         // 리턴값은 HTML의 파일이름과 동일해야함.
+    }
+
+
+    @GetMapping("/book")
+    public String requestBookById(Model model, @RequestParam("id") String bookId)
+    {
+        Book book = bookService.getBookById(bookId);
+        model.addAttribute("book", book);
+        return "book";
+    }
+
+    @GetMapping("/{category}")
+    public String requestBooksByCategory(@PathVariable("category")String category, Model model)
+    {
+        List<Book> booksByCategory = bookService.getBookListByCategory(category);
+        // "bookList" 이거 기존거랑 같게 해야함. 주소가 같음.
+        model.addAttribute("bookList", booksByCategory);
+        return "books";
     }
 
 }

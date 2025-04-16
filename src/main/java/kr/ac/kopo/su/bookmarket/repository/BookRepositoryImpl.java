@@ -55,6 +55,20 @@ public class BookRepositoryImpl implements BookRepository
         return bookInfo;
     }
 
+    @Override
+    public List<Book> getBookListByCategory(String category)
+    {
+        List<Book> booksByCategory = new ArrayList<>();
+        for (Book book : listOfBooks)
+        {
+            if (book.getCategory() != null && book.getCategory().equals(category))
+            {
+                booksByCategory.add(book);
+            }
+        }
+        return booksByCategory;
+    }
+
     public Book setBook(Book newBook, String bookId, String name,
                         BigDecimal unitPrice, String author,
                         String description, String publisher,
@@ -73,4 +87,7 @@ public class BookRepositoryImpl implements BookRepository
         newBook.setCondition(condition);
         return newBook;
     }
+
+
+
 }
