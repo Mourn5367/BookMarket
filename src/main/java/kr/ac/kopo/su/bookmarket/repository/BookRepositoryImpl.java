@@ -4,8 +4,7 @@ import kr.ac.kopo.su.bookmarket.domain.Book;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 // 이거 Book 생성자 자체에 이거 다 입력하도록 하면 굳이 setBook 안해도됨
@@ -66,6 +65,43 @@ public class BookRepositoryImpl implements BookRepository
                 booksByCategory.add(book);
             }
         }
+        return booksByCategory;
+    }
+
+    @Override
+    public Set<Book> getBookListByFilter(Map<String, List<String>> filter)
+    {
+        Set<Book> booksByPublisher = new HashSet<>();
+        Set<Book> booksByCategory = new HashSet<>();
+        Set<String> booksByFilter = filter.keySet();
+
+        if (booksByFilter.contains("publisher"))
+        {
+            for ( int i = 0; i < filter.get("publisher").size(); i++)
+            {
+                String publisherName = filter.get("publisher").get(i);
+                for (Book book : listOfBooks)
+                {
+                    if(publisherName.equalsIgnoreCase(book.getPublisher()))
+                    {
+                        booksByPublisher.add(book);
+
+                    }
+                }
+            }
+        }
+
+        if (booksByFilter.contains("category"))
+        {
+            for (int i = 0; i < filter.get("category").size(); i++) {
+                String categoryName = filter.get("category").get(i);
+                List<Book> list = getBookListByCategory(categoryName);
+                booksByCategory.addAll(list);
+            }
+        }
+        // 저장된 요소에서 같은 값만 남기고 나머지는 제거 retainAll
+        booksByCategory.retainAll(booksByPublisher);
+
         return booksByCategory;
     }
 
