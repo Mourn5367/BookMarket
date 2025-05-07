@@ -90,7 +90,15 @@
         </div>
 
         <div class="row align-items-md-stretch">
-            <div class="col-md-12">
+
+            <div class="col-md-4" style="text-align:center">
+                <img th:src="'/BookMarket/images/' + ${book.getFileName()}" style="width: 90%" th:alt = "${book.getFileName()}"/>
+                <div class = "text-center" style="margin-top: 20px; text-decoration-line: none;">
+                    <a style="text-decoration-line: none" th:href = "@{download(file = ${book.getFileName()})}">이미지 다운로드</a>
+                </div>
+            </div>
+
+            <div class="col-md-8">
                 <h3 th:text="${book.getName()}"></h3>
                 <p th:text="${book.getDescription()}"></p>
                 <br>
