@@ -105,6 +105,12 @@ public class BookRepositoryImpl implements BookRepository
         return booksByCategory;
     }
 
+    @Override
+    public void setNewBook(Book book)
+    {
+        listOfBooks.add(book);
+    }
+
     public Book setBook(Book newBook, String bookId, String name,
                         BigDecimal unitPrice, String author,
                         String description, String publisher,
