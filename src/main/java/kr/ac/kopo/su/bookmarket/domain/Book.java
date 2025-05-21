@@ -1,6 +1,7 @@
 package kr.ac.kopo.su.bookmarket.domain;
 
 import jakarta.validation.constraints.*;
+import kr.ac.kopo.su.bookmarket.validator.BookId;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 @Data
 public class Book
 {
+    @BookId
     @Pattern(regexp="ISBN_[0-9]+")
     private String bookId; // 도서번호
     @Size(min=4, max=50)
