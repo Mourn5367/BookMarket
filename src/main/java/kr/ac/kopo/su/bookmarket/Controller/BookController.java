@@ -79,7 +79,7 @@ public class BookController
         List<Book> booksByCategory = bookService.getBookListByCategory(category);
         if (booksByCategory == null || booksByCategory.isEmpty())
         {
-            throw new CategoryException();
+            throw new CategoryException(category);
         }
         // "bookList" 이거 기존거랑 같게 해야함. 주소가 같음.
         model.addAttribute("bookList", booksByCategory);
