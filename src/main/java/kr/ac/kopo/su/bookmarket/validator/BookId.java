@@ -16,3 +16,4 @@ public @interface BookId
     Class<?>[] groups() default {};
     Class<?>[] payload() default {};
 }
+

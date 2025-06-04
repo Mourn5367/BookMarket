@@ -1,6 +1,7 @@
 package kr.ac.kopo.su.bookmarket.repository;
 
 import kr.ac.kopo.su.bookmarket.domain.Book;
+import kr.ac.kopo.su.bookmarket.exception.BookIdException;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -33,6 +34,8 @@ public class BookRepositoryImpl implements BookRepository
         return listOfBooks;
     }
 
+
+
     @Override
     public Book getBookById(String bookId)
     {
@@ -46,11 +49,14 @@ public class BookRepositoryImpl implements BookRepository
             }
         }
 
-        if (bookInfo == null)
-        {
-            throw new IllegalArgumentException("도서 ID가 \""+bookId + "\" 인 도서는 없습니다.");
-        }
-
+//        if (bookInfo == null)
+//        {
+//            throw new IllegalArgumentException("도서 ID가 \""+bookId + "\" 인 도서는 없습니다.");
+//        }
+          if (bookInfo == null)
+          {
+              throw new BookIdException(bookId);
+          }
         return bookInfo;
     }
 

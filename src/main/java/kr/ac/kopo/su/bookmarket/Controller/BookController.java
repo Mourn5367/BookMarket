@@ -1,9 +1,12 @@
 package kr.ac.kopo.su.bookmarket.Controller;
 
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import kr.ac.kopo.su.bookmarket.domain.Book;
+import kr.ac.kopo.su.bookmarket.exception.BookIdException;
+import kr.ac.kopo.su.bookmarket.exception.CategoryException;
 import kr.ac.kopo.su.bookmarket.service.BookService;
 import kr.ac.kopo.su.bookmarket.validator.BookValidator;
 import kr.ac.kopo.su.bookmarket.validator.UnitsInStockValidator;
@@ -74,6 +77,10 @@ public class BookController
     public String requestBooksByCategory(@PathVariable("category")String category, Model model)
     {
         List<Book> booksByCategory = bookService.getBookListByCategory(category);
+        if (booksByCategory == null || booksByCategory.isEmpty())
+        {
+            throw new CategoryException();
+        }
         // "bookList" 이거 기존거랑 같게 해야함. 주소가 같음.
         model.addAttribute("bookList", booksByCategory);
         return "books";
@@ -155,6 +162,18 @@ public class BookController
                                 "author", "publisher", "description",
                                 "category","unitsInStock","releaseDate",
                                 "condition", "bookImage");
+    }
+
+    @ExceptionHandler(value = {BookIdException.class})
+    public ModelAndView handleException(HttpServletRequest req, BookIdException e)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("invalidBookId", e.getBookId());
+        modelAndView.addObject("exception", e.toString());
+        modelAndView.addObject("url",req.getRequestURL() + "?" + req.getRequestURI());
+        modelAndView.setViewName("errorBook");
+
+        return modelAndView;
     }
 
 }
