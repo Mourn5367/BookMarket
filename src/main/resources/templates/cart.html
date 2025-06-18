@@ -7,9 +7,10 @@
           rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous">
+    <script src="/BookMarket/js/controllers.js">
+        // integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        // crossorigin="anonymous"
+
     </script>
 
 
@@ -92,7 +93,11 @@
 
 
             <div class="col-md-12">
-                <a href="#" class= "btn btn-success text-right" style="float:right">주문하기</a>
+                <form name="deleteForm" method="post">
+                    <input type = "hidden" name = "_method" value = "delete"/>
+                    <a th:href="'javascript:deleteCart()'" class= "btn btn-danger" style="float:left">삭제하기</a>
+                    <a href="#" class= "btn btn-success text-right" style="float:right">주문하기</a>
+                </form>
             </div>
            <div style="padding-top: 50px">
                <table class="table table-hover">
@@ -104,6 +109,8 @@
                        <th>비고</th>
                        <th></th>
                    </tr>
+                   <form name="removeForm" method="post">
+                       <input type = "hidden" name = "_method" value = "delete"/>
                    <div th:if = "${cart != null}">
                     <div th:each="cartItem : ${cart.cartItems}">
                        <tr>
@@ -112,10 +119,11 @@
                            <td th:text = "${cartItem.value.book.unitPrice}"></td>
                            <td th:text = "${cartItem.value.quantity}"></td>
                            <td th:text = "${cartItem.value.totalPrice}"></td>
-                           <td></td>
+                           <td><a th:href="'javascript:removeFromCart(\''+ ${cartItem.value.book.bookId} +'\', \''+ ${cartId} +'\')'"><span class = "badge text-bg-danger">삭제</span></sp></a></td>
                        </tr>
                     </div>
                    </div>
+                   </form>
                </table>
 
                <div class = "text-end" style = "padding-right: 30px">

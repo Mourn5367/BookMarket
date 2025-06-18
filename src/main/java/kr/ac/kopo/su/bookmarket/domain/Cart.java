@@ -27,4 +27,39 @@ public class Cart
         this();
         this.cartId = cartId;
     }
+
+    // 전체 주문 총액을 업데이트 하는 메소드
+    public void updateGrandTotal()
+    {
+        grandTotal = new BigDecimal(0);
+        for(CartItem cartItem : cartItems.values())
+        {
+            grandTotal = grandTotal.add(cartItem.getTotalPrice());
+        }
+    }
+
+    public void addCartItem(CartItem item)
+    {
+        String bookId = item.getBook().getBookId();
+        if (cartItems.containsKey(bookId))
+        {
+            CartItem cartItem = cartItems.get(bookId);
+            cartItem.setQuantity(cartItem.getQuantity() + item.getQuantity());
+            cartItems.put(bookId, cartItem);
+        }
+        else
+        {
+            cartItems.put(bookId, item);
+        }
+        updateGrandTotal();
+
+    }
+
+    public void removeCartItem(CartItem item)
+    {
+        String bookId = item.getBook().getBookId();
+        cartItems.remove(bookId);
+        updateGrandTotal();
+    }
+
 }
