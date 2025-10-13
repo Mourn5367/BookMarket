@@ -96,7 +96,7 @@
                 <form name="deleteForm" method="post">
                     <input type = "hidden" name = "_method" value = "delete"/>
                     <a th:href="'javascript:deleteCart()'" class= "btn btn-danger" style="float:left">삭제하기</a>
-                    <a href="#" class= "btn btn-success text-right" style="float:right">주문하기</a>
+                    <a th:href="'/BookMarket/order/'+${cart.cartId}" class= "btn btn-success text-right" style="float:right">주문하기</a>
                 </form>
             </div>
            <div style="padding-top: 50px">
@@ -119,7 +119,7 @@
                            <td th:text = "${cartItem.value.book.unitPrice}"></td>
                            <td th:text = "${cartItem.value.quantity}"></td>
                            <td th:text = "${cartItem.value.totalPrice}"></td>
-                           <td><a th:href="'javascript:removeFromCart(\''+ ${cartItem.value.book.bookId} +'\', \''+ ${cartId} +'\')'"><span class = "badge text-bg-danger">삭제</span></sp></a></td>
+                           <td><a th:href="'javascript:removeFromCart(\''+ ${cartItem.value.book.bookId} +'\', \''+ ${cart.cartId} +'\')'"><span class = "badge text-bg-danger">삭제</span></sp></a></td>
                        </tr>
                     </div>
                    </div>
