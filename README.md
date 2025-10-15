@@ -215,3 +215,41 @@ Spring의 Matrix Variable을 활용한 유연한 필터링:
 - BCrypt 암호화
 - 관리자 페이지 접근 제어 (ROLE_ADMIN)
 - 세션 기반 장바구니 관리
+
+
+## 🖥️ 주요 화면
+
+- 도서 목록
+
+![도서 목록](https://velog.velcdn.com/images/mourn5367/post/d44756b0-a37a-4300-bf4f-6c9eae59f93b/image.png)
+
+- 카테고리별 도서 검색(좌측 상단 IT 교재 클릭)
+
+![IT 교재](https://velog.velcdn.com/images/mourn5367/post/f7d286b5-b74d-49d6-8f2c-45ea07410be3/image.png)
+
+- 도서 상세 정보
+
+![도서 상세 정보](https://velog.velcdn.com/images/mourn5367/post/524ea283-ce05-4727-8a0d-427dc28e257e/image.png)
+
+- 도서 주문 후 장바구니 확인 및 도서 삭제
+
+![장바구니](https://velog.velcdn.com/images/mourn5367/post/c38a21d9-d8a4-4a32-b794-68974fefa13c/image.png)
+![장바구니_1](https://velog.velcdn.com/images/mourn5367/post/6005dcf8-ba16-49d6-9c8e-7d725f04726e/image.png)
+
+- 주문
+
+![주문](https://velog.velcdn.com/images/mourn5367/post/aa611dbf-4e22-421b-bad0-78dd4583add2/image.png)
+![주문](https://velog.velcdn.com/images/mourn5367/post/cbc67a8b-3832-499f-990f-2c8dd6672d2c/image.png)
+
+- 영수증
+
+![영수증](https://velog.velcdn.com/images/mourn5367/post/cbc67a8b-3832-499f-990f-2c8dd6672d2c/image.png)
+
+- 주문취소
+  
+![주문취소](https://velog.velcdn.com/images/mourn5367/post/a0b05d6a-d9a1-47e8-b094-897fe5e76561/image.png)
+
+- 주문 취소후 장바구니
+<p align="left">
+  <img src="https://velog.velcdn.com/images/mourn5367/post/0b2a1dbb-53c0-479f-9f1a-1b17c83fa188/image.png" alt="취소 장바구니" width="700">
+</p>
