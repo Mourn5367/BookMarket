@@ -243,7 +243,7 @@ Spring의 Matrix Variable을 활용한 유연한 필터링:
 
 - 영수증
 
-![영수증](https://velog.velcdn.com/images/mourn5367/post/cbc67a8b-3832-499f-990f-2c8dd6672d2c/image.png)
+![영수증](https://velog.velcdn.com/images/mourn5367/post/2118472a-b7af-42d8-a26b-84c0c0d81458/image.png)
 
 - 주문취소
   
