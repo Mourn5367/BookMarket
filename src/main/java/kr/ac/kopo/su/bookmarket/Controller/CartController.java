@@ -48,7 +48,14 @@ public class CartController
     {
         System.out.println("request cart List : " + cartId);
         Cart cart = cartService.read(cartId);
+
+        if (cart == null)
+        {
+            cart = cartService.create(new Cart(cartId));
+        }
+
         model.addAttribute("cart", cart);
+        model.addAttribute("cartId", cartId);
         return "cart";
     }
 

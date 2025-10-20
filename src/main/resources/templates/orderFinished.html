@@ -93,12 +93,12 @@
             <div class = "container">
                 <h2 class = "alert-danger">주문해 주셔서 감사합니다.</h2>
                 <p>주문은 [[${order.shipping.date}]]에 배송될 예정입니다.</p>
-                <p>주문번호: [[${order.orderId}]]</p>
+                <p>주문번호: [[${order.getOrderId()}]]</p>
             </div>
         </div>
 
         <br>
-        <p><a class = "btn btn-primary" href="/BookMarket/books"></a> &laquo; 도서목록</p>
+        <p><a class = "btn btn-primary" href="/BookMarket/books">&laquo; 도서목록</a></p>
 
         <footer class="pt-3 mt-4 text-body-secondary border-top">
             <span class="text-body-secondary">&copy; 2025 BookMarket  All rights reserved</span>

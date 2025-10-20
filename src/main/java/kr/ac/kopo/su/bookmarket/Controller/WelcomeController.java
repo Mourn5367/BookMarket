@@ -93,9 +93,8 @@ public class WelcomeController {
                 "\n" +
                 "        <div class=\"p-5 mb-4 bg-body-tertiary rounded-3\">\n" +
                 "            <div class=\"container-fluid py-5\">\n" +
-                "                <h1 class=\"display-5 fw-bold\">도서 쇼핑몰에 오신것을 환영합니다.</h1>\n" +
+                "                <h1 class=\"display-5 fw-bold\">도서 쇼핑몰에 오신것을 환영합니다.</h1><br>\n" +
                 "                <p class=\"col-md-8 fs-4\">BookMarket</p>\n" +
-                "                <button class=\"btn btn-primary btn-lg\" type=\"button\">Example button</button>\n" +
                 "            </div>\n" +
                 "        </div>\n" +
                 "\n" +
