@@ -104,24 +104,44 @@
                     <a th:href="@{/order/deleteAll}" class="btn bg-danger">삭제하기</a>
                 </form>
             </div>
-
             <div style = "padding-top: 30px">
+
                 <div class="text-end" style = "padding-right: 30px">
                     전체 주문 수: [[${totalItems}]]
                 </div>
 
                 <table class=" table table-hover">
                     <tr>
-                        <th>주문 ID</th>
-                        <th>고객 ID</th>
-                        <th>배송지</th>
-                        <th>총액</th>
+                        <th><a th:href="@{'/order/page?pageNum=' + ${currentPage} + '$sortField=orderId&sortDir=' + ${reversSortDir}}">주문 ID</a></th>
+                        <th><a th:href="@{'/order/page?pageNum=' + ${currentPage} + '$sortField=customer_id=' + ${reversSortDir}}">고객 ID</a></th>
+                        <th><a th:href="@{'/order/page?pageNum=' + ${currentPage} + '$sortField=shipping&sortDir=' + ${reversSortDir}}">배송지</a></th>
+                        <th><a th:href="@{'/order/page?pageNum=' + ${currentPage} + '$sortField=grandTotal&sortDir=' + ${reversSortDir}}">총액</a></th>
                         <th>비고</th>
                     </tr>
+                    <form name="removeForm" id = "removeForm" method="post" action="">
+                        <input type="hidden" name="_method" value="delete">
+                        <div th:each="order : ${orderList}">
+                            <tr>
+                                <td th:text="${order.orderId}"></td>
+                                <td th:text="${order.customer.id}"></td>
+                                <td th:text="${order.shipping.address.addressName}"></td>
+                                <td th:text="${order.grandTotal}"></td>
+                                <td>
+                                    <a th:href="@{'/order/view' + ${order.orderId}}"><span class="badge text-bg-secondary" th:text="상세보기"></span></a>
+                                    <a th:href="@{'/order/edit' + ${order.orderId}}"><span class="badge text-bg-info" th:text="수정"></span></a>
+                                    <a th:href="@{'/order/delete' + ${order.orderId}}"><span class="badge text-bg-danger" th:text="삭제"></span></a>
+                                </td>
+                            </tr>
+                        </div>
+
+
+                    </form>
+                    
                 </table>
 
+            <div>&nbsp;</div>
+                <div><i> Sorted by [[${sortField}]] in [[${sortFile}]]</i></div>
             </div>
-
         </div>
         <footer class="pt-3 mt-4 text-body-secondary border-top">
             <span class="text-body-secondary">&copy; 2025 BookMarket  All rights reserved</span>

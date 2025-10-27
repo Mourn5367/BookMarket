@@ -95,8 +95,13 @@
             <div class="col-md-12">
                 <form name="deleteForm" method="post">
                     <input type = "hidden" name = "_method" value = "delete"/>
-                    <a th:href="'javascript:deleteCart()'" class= "btn btn-danger" style="float:left">삭제하기</a>
-                    <a th:href="'/BookMarket/order/'+${cartId}" class= "btn btn-success text-right" style="float:right">주문하기</a>
+                    <div th:if="${cart != null and !cart.cartItems.isEmpty()}">
+                        <a th:href="'javascript:deleteCart()'" class= "btn btn-danger" style="float:left">삭제하기</a>
+                        <a th:href="'/BookMarket/order/'+${cartId}" class= "btn btn-success text-right" style="float:right">주문하기</a>
+                    </div>
+                    <div th:if="${cart == null or cart.cartItems.isEmpty()}">
+                        <span class="text-muted" style="float:left">장바구니에 상품을 담아주세요.</span>
+                    </div>
                 </form>
             </div>
            <div style="padding-top: 50px">
