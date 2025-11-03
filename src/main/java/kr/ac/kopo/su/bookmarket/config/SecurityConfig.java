@@ -45,7 +45,7 @@ public class SecurityConfig
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/books/add").hasRole("ADMIN")
-                        .requestMatchers("/order/list").hasRole("ADMIN")
+                        .requestMatchers("/order/list", "/order/page", "/order/view/**", "/order/edit/**", "/order/delete/**", "/order/deleteAll", "/order/save").hasRole("ADMIN")
                         .anyRequest().permitAll()
                 )
 //                .formLogin(Customizer.withDefaults());
