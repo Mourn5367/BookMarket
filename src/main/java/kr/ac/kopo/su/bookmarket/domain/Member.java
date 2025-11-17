@@ -16,7 +16,7 @@ public class Member
     @Id
     @Column(name ="num")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long num;
+    private String num;
     @Enumerated(EnumType.STRING)
     private String memberId;
 
