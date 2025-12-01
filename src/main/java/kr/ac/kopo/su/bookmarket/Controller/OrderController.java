@@ -102,19 +102,33 @@ public class OrderController {
         orderService.saveOrder(order);
         //order.setOrderId(orderId);
         model.addAttribute("order",order);
+
+        // 수정: session.invalidate()는 Spring Security 로그인 정보까지 삭제하여 로그아웃됨
+        // 장바구니만 삭제하도록 변경
+        // HttpSession session = request.getSession(false);
+        // if(session != null) {
+        //     session.invalidate();
+        // }
         HttpSession session = request.getSession(false);
-        if(session != null) {
-            session.invalidate();
+        if (session != null) {
+            cartService.delete(session.getId());  // 장바구니만 삭제
         }
+
         return "orderFinished";
     }
 
     @GetMapping("/orderCancelled")
     public String requestCancelled(HttpServletRequest request ) {
-        HttpSession session = request.getSession(false);
-        if(session != null) {
-            session.invalidate();
-        }
+        // 수정: session.invalidate()는 Spring Security 로그인 정보까지 삭제하여 로그아웃됨
+        // 장바구니만 삭제하도록 변경
+        // HttpSession session = request.getSession(false);
+        // if(session != null) {
+        //     session.invalidate();
+        // }
+
+        String sessionId = request.getSession().getId();
+        cartService.delete(sessionId);  // 장바구니만 삭제
+
         return "orderCancelled";
     }
 
@@ -134,7 +148,7 @@ public class OrderController {
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reversSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("orderList", listOrders);
         return "orderList";
     }

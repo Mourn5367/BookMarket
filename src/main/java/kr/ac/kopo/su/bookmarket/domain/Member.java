@@ -15,9 +15,9 @@ public class Member
 {
     @Id
     @Column(name ="num")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String num;
-    @Enumerated(EnumType.STRING)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long num;
+
     private String memberId;
 
     private String password;
@@ -26,7 +26,7 @@ public class Member
     private String email;
     private String address;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Role role;
 
     public static Member createMember(MemberFormDTO memberFormDTO, PasswordEncoder passwordEncoder)

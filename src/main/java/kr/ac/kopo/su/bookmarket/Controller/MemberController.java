@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/member")
+@RequestMapping(value = "/members")
 public class MemberController
 {
     @Autowired
@@ -57,7 +57,7 @@ public class MemberController
             return "member/addMember";
         }
 
-        return "member/members";
+        return "redirect:/login";
     }
 
     // 회원 수정 폼
@@ -90,7 +90,7 @@ public class MemberController
             return "member/updateMember";
         }
 
-        return "redirect:/members";
+        return "redirect:/";
     }
 
     // 회원 삭제
