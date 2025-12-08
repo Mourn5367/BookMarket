@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -51,6 +52,8 @@
                     <a th:href="'javascript:addToCart(\''+ ${book.getBookId()} +'\')'" class="btn btn-primary">도서주문 &raquo;</a>
                     <a href="/BookMarket/cart" class="btn btn-warning" role="button">장바구니 &raquo;</a>
                     <a href="/BookMarket/books" class="btn btn-secondary" role="button">도서목록 &raquo;</a>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="'/BookMarket/books/update?id='+${book.bookId}" class="btn btn-success"> 수정&raquo;</a>
+                    <a  sec:authorize="hasRole('ROLE_ADMIN')"  th:href="'javascript:deleteConfirm(\''+${book.bookId}+'\')'" class="btn btn-danger" > 삭제 &raquo; </a>
                 </form>
                 <p>
 <!--                <a href="#" class="btn btn-primary" >도서주문하기</a>-->

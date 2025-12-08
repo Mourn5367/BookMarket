@@ -2,6 +2,8 @@ package kr.ac.kopo.su.bookmarket.repository;
 
 import kr.ac.kopo.su.bookmarket.domain.Book;
 import kr.ac.kopo.su.bookmarket.exception.BookIdException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -12,26 +14,34 @@ import java.util.*;
 @Repository
 public class BookRepositoryImpl implements BookRepository
 {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+
     public BookRepositoryImpl()
     {
-        Book book1 = new Book();
-        Book book2 = new Book();
-        Book book3 = new Book();
-        listOfBooks.add(setBook(book1,"ISBN_0001","SpringBoot 완전정복",
-                BigDecimal.valueOf(35000),"송미영","스프링 부트는 스프링을 기반으로 쉽고 빠르게 웹 애플리케이션을 개발할 수 있는 도구이다. 이 책에서는 스프링 부트의 기본 개념을 쉽게 이해하고 다양한 실습 예제로 빠르게 익힐 수 있다. 그리고 단계별 실습을 따라 하다 보면 도서 쇼핑몰 구축 프로젝트를 완성할 수 있다. 개념-실습-프로젝트의 3단계 학습으로 스프링 부트를 제대로 익힌다면 개발 시간을 단축하고 생산성을 높일 수 있는 개발자로 성장할 수 있다.\n" +
-                        "\n",
-                "길벗캠퍼스","IT 교재",1000,"2024/12/31","신규도서","ISBN_0001.jpg"));
-        listOfBooks.add(setBook(book2,"ISBN_0002","도둑맞은 집중력",
-                BigDecimal.valueOf(13800),"요한하리","집중력의 위기가 곧 재앙인 이유와 집중력을 훔쳐 가는 도둑들에 관한 이야기를 거쳐 책은 우리의 집중력을 되찾기 위한 방법으로 향한다. 저자의 제안은 대담하게 사회 전체의 구조를 저격한다. \"주 4일제가 필요하다.\" 맥락 없이 들으면 의아한 해결책이지만 책을 집중력 있게 읽었다면 충분히 납득 가능하다. 이 놀라운 결론을 함께 주장하기 위해, 쇼츠와 톡과 타임라인에 중독된 모든 이들에게 이 책을 권한다.",
-                "어크로스","사회 과학",444,"2023/04/28","중고도서","ISBN_0002.jpg"));
-        listOfBooks.add(setBook(book3,"ISBN_0003","도둑맞은 손",
-                BigDecimal.valueOf(18000),"장 피에르 보","프랑스에서 생명윤리법이 제정된 1994년 직전에, 생명윤리에 대한 논쟁을 촉발하려는 목적으로 출간된 책이다. 저자는 산업화와 생명공학의 폭발적 발전, 공공 보건 개념과 사회보장 제도의 도입, 몸을 대상화하는 대중문화와 자본주의의 강력한 작동하에 몸과 관련된 쟁점들이 점점 더 첨예해지고 있는 현대의 지형을 촘촘히 그려나가며 결국 생명의 현현(顯現)이자 주체인 ‘인간’이란 무엇인지, 인간을 이렇게 정의하고 해석하는 이 ‘사회’는 무엇인지를 묻고 있다.",
-                "이음","교양 철학",777,"2019/09/06","신규도서","ISBN_0003.jpg"));
+//        Book book1 = new Book();
+//        Book book2 = new Book();
+//        Book book3 = new Book();
+//        listOfBooks.add(setBook(book1,"ISBN_0001","SpringBoot 완전정복",
+//                BigDecimal.valueOf(35000),"송미영","스프링 부트는 스프링을 기반으로 쉽고 빠르게 웹 애플리케이션을 개발할 수 있는 도구이다. 이 책에서는 스프링 부트의 기본 개념을 쉽게 이해하고 다양한 실습 예제로 빠르게 익힐 수 있다. 그리고 단계별 실습을 따라 하다 보면 도서 쇼핑몰 구축 프로젝트를 완성할 수 있다. 개념-실습-프로젝트의 3단계 학습으로 스프링 부트를 제대로 익힌다면 개발 시간을 단축하고 생산성을 높일 수 있는 개발자로 성장할 수 있다.\n" +
+//                        "\n",
+//                "길벗캠퍼스","IT 교재",1000,"2024/12/31","신규도서","ISBN_0001.jpg"));
+//        listOfBooks.add(setBook(book2,"ISBN_0002","도둑맞은 집중력",
+//                BigDecimal.valueOf(13800),"요한하리","집중력의 위기가 곧 재앙인 이유와 집중력을 훔쳐 가는 도둑들에 관한 이야기를 거쳐 책은 우리의 집중력을 되찾기 위한 방법으로 향한다. 저자의 제안은 대담하게 사회 전체의 구조를 저격한다. \"주 4일제가 필요하다.\" 맥락 없이 들으면 의아한 해결책이지만 책을 집중력 있게 읽었다면 충분히 납득 가능하다. 이 놀라운 결론을 함께 주장하기 위해, 쇼츠와 톡과 타임라인에 중독된 모든 이들에게 이 책을 권한다.",
+//                "어크로스","사회 과학",444,"2023/04/28","중고도서","ISBN_0002.jpg"));
+//        listOfBooks.add(setBook(book3,"ISBN_0003","도둑맞은 손",
+//                BigDecimal.valueOf(18000),"장 피에르 보","프랑스에서 생명윤리법이 제정된 1994년 직전에, 생명윤리에 대한 논쟁을 촉발하려는 목적으로 출간된 책이다. 저자는 산업화와 생명공학의 폭발적 발전, 공공 보건 개념과 사회보장 제도의 도입, 몸을 대상화하는 대중문화와 자본주의의 강력한 작동하에 몸과 관련된 쟁점들이 점점 더 첨예해지고 있는 현대의 지형을 촘촘히 그려나가며 결국 생명의 현현(顯現)이자 주체인 ‘인간’이란 무엇인지, 인간을 이렇게 정의하고 해석하는 이 ‘사회’는 무엇인지를 묻고 있다.",
+//                "이음","교양 철학",777,"2019/09/06","신규도서","ISBN_0003.jpg"));
     }
 
     private List<Book> listOfBooks  = new ArrayList<Book>();
     @Override
-    public List<Book> getAllBookList() {
+    public List<Book> getAllBookList()
+    {
+        String sql = "select * from book";
+        listOfBooks = jdbcTemplate.query(sql, new BookRowMapper());
         return listOfBooks;
     }
 
@@ -41,23 +51,37 @@ public class BookRepositoryImpl implements BookRepository
     public Book getBookById(String bookId)
     {
         Book bookInfo = null;
-        for (Book book : listOfBooks)
+//        for (Book book : listOfBooks)
+//        {
+//            if (book != null && book.getBookId() != null && book.getBookId().equals(bookId))
+//            {
+//                bookInfo = book;
+//                break;
+//            }
+//        }
+
+////        if (bookInfo == null)
+////        {
+////            throw new IllegalArgumentException("도서 ID가 \""+bookId + "\" 인 도서는 없습니다.");
+////        }
+//          if (bookInfo == null)
+//          {
+//              throw new BookIdException(bookId);
+//          }
+
+        String sql  = "select count(*) from book where b_bookId = ?";
+        int rowCount = jdbcTemplate.queryForObject(sql, Integer.class, bookId);
+
+        if (rowCount != 0)
         {
-            if (book != null && book.getBookId() != null && book.getBookId().equals(bookId))
-            {
-                bookInfo = book;
-                break;
-            }
+            sql  = "select * from book where b_bookId = ?";
+            bookInfo = jdbcTemplate.queryForObject(sql, new BookRowMapper(), bookId);
         }
 
-//        if (bookInfo == null)
-//        {
-//            throw new IllegalArgumentException("도서 ID가 \""+bookId + "\" 인 도서는 없습니다.");
-//        }
-          if (bookInfo == null)
-          {
-              throw new BookIdException(bookId);
-          }
+        if (bookInfo == null)
+            throw new BookIdException(bookId);
+
+
         return bookInfo;
     }
 
@@ -65,13 +89,17 @@ public class BookRepositoryImpl implements BookRepository
     public List<Book> getBookListByCategory(String category)
     {
         List<Book> booksByCategory = new ArrayList<>();
-        for (Book book : listOfBooks)
-        {
-            if (book.getCategory() != null && book.getCategory().equals(category))
-            {
-                booksByCategory.add(book);
-            }
-        }
+//        for (Book book : listOfBooks)
+//        {
+//            if (book.getCategory() != null && book.getCategory().equals(category))
+//            {
+//                booksByCategory.add(book);
+//            }
+//        }
+
+        String sql = "select * from book where b_category like '%" + category + "%'";
+        booksByCategory = jdbcTemplate.query(sql, new BookRowMapper());
+
         return booksByCategory;
     }
 
@@ -82,40 +110,73 @@ public class BookRepositoryImpl implements BookRepository
         Set<Book> booksByCategory = new HashSet<>();
         Set<String> booksByFilter = filter.keySet();
 
-        if (booksByFilter.contains("publisher"))
+//        if (booksByFilter.contains("publisher"))
+//        {
+//            for ( int i = 0; i < filter.get("publisher").size(); i++)
+//            {
+//                String publisherName = filter.get("publisher").get(i);
+//                for (Book book : listOfBooks)
+//                {
+//                    if(publisherName.equalsIgnoreCase(book.getPublisher()))
+//                    {
+//                        booksByPublisher.add(book);
+//
+//                    }
+//                }
+//            }
+//        }
+//        if (booksByFilter.contains("category"))
+//        {
+//            for (int i = 0; i < filter.get("category").size(); i++) {
+//                String categoryName = filter.get("category").get(i);
+//                List<Book> list = getBookListByCategory(categoryName);
+//                booksByCategory.addAll(list);
+//            }
+//        }
+        if(booksByFilter.contains("publisher"))
         {
-            for ( int i = 0; i < filter.get("publisher").size(); i++)
+            for(int i = 0; i < filter.get("publisher").size(); i++)
             {
                 String publisherName = filter.get("publisher").get(i);
-                for (Book book : listOfBooks)
-                {
-                    if(publisherName.equalsIgnoreCase(book.getPublisher()))
-                    {
-                        booksByPublisher.add(book);
+                String sql = "select * from book where b_publisher like '%" + publisherName + "%'";
+                List<Book> books = jdbcTemplate.query(sql, new BookRowMapper());
+                booksByPublisher.addAll(books);
 
-                    }
-                }
             }
         }
-
-        if (booksByFilter.contains("category"))
+        if(booksByFilter.contains("category"))
         {
-            for (int i = 0; i < filter.get("category").size(); i++) {
-                String categoryName = filter.get("category").get(i);
-                List<Book> list = getBookListByCategory(categoryName);
-                booksByCategory.addAll(list);
+            for(int i = 0; i < filter.get("category").size(); i++)
+            {
+                String category = filter.get("category").get(i);
+                String sql = "select * from book where b_publisher like '%" + category + "%'";
+                List<Book> books = jdbcTemplate.query(sql, new BookRowMapper());
+                booksByCategory.addAll(books);
+
             }
         }
+
+
+
         // 저장된 요소에서 같은 값만 남기고 나머지는 제거 retainAll
         booksByCategory.retainAll(booksByPublisher);
 
         return booksByCategory;
     }
 
-    @Override
-    public void setNewBook(Book book)
-    {
-        listOfBooks.add(book);
+//    @Override
+//    public void setNewBook(Book book)
+//    {
+//        listOfBooks.add(book);
+//    }
+
+    public void setNewBook(Book book) {
+        String SQL = "INSERT INTO book (b_bookId, b_name, b_unitPrice, b_author, b_description, b_publisher, b_category, b_unitsInStock, b_releaseDate,b_condition, b_fileName) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        jdbcTemplate.update(SQL, book.getBookId(), book.getName(), book.getUnitPrice(), book.getAuthor(),
+                book.getDescription(), book.getPublisher(), book.getCategory(), book.getUnitsInStock(),
+                book.getReleaseDate(), book.getCondition(), book.getFileName());
     }
 
     public Book setBook(Book newBook, String bookId, String name,
@@ -139,6 +200,23 @@ public class BookRepositoryImpl implements BookRepository
         return newBook;
     }
 
+    public void setUpdateBook(Book book) {
+        if (book.getFileName() != null) {
+            String SQL = "UPDATE Book SET b_name = ?, b_unitPrice = ?, b_author = ?, b_description = ?, b_publisher = ?, b_category = ?, b_unitsInStock = ?,b_releaseDate = ?, b_condition = ?, b_fileName = ?  where b_bookId = ? ";
+            jdbcTemplate.update(SQL, book.getName(), book.getUnitPrice(), book.getAuthor(), book.getDescription(),
+                    book.getPublisher(), book.getCategory(), book.getUnitsInStock(), book.getReleaseDate(),
+                    book.getCondition(), book.getFileName(), book.getBookId());
+        } else if (book.getFileName() == null) {
+            String SQL = "UPDATE Book SET b_name = ?, b_unitPrice = ?, b_author = ?, b_description = ?, b_publisher = ?, b_category = ?, b_unitsInStock = ?, b_releaseDate = ?, b_condition = ?  where b_bookId = ? ";
+            jdbcTemplate.update(SQL, book.getName(), book.getUnitPrice(), book.getAuthor(), book.getDescription(),
+                    book.getPublisher(), book.getCategory(), book.getUnitsInStock(), book.getReleaseDate(),
+                    book.getCondition(), book.getBookId());
+        }
+    }
 
+    public void setDeleteBook(String bookID) {
+        String SQL = "DELETE from Book where b_bookId = ? ";
+        jdbcTemplate.update(SQL, bookID);
+    }
 
 }
